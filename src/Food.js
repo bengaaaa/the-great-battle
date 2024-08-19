@@ -1,7 +1,14 @@
 import React from 'react';
 
-function Food({ name }) {
-  return <span>{name}</span>; // Use span instead of div to keep it inline
+function Food({ name, country, description }) {
+  return (
+    <div style={{ cursor: 'pointer', textAlign: 'center', margin: '10px' }}>
+      <div style={{ fontSize: '48px', fontWeight: 'bold' }}>
+        {name} {country}
+      </div>
+      <div style={{ fontSize: '14px', color: '#555' }}>{description}</div>
+    </div>
+  );
 }
 
 export default Food;

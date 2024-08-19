@@ -4,7 +4,12 @@
   padding: 20px;
 }
 
+.food-vs-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .App h2 {
-  display: inline;
   margin: 0 10px; /* Adjusts spacing between items */
 }

@@ -4,6 +4,7 @@
   padding: 20px;
 }
 
-h1 {
-  color: #61dafb;
+.App h2 {
+  display: inline;
+  margin: 0 10px; /* Adjusts spacing between items */
 }

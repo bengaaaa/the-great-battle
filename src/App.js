@@ -1,16 +1,16 @@
 import React from 'react';
 import './App.css';
-import Greeting from './Greeting';
+import Food from './Food';
 
 function App() {
   return (
     <div className="App">
-      <h1>Hello, World!</h1>
-      <Greeting name="Alice" />
-      <Greeting name="Bob" />
+      <h1>The Great Battle!</h1>
+      <Food name="Ramen" />
+      <h2>VS</h2>
+      <Food name="Pad thai" />
     </div>
   );
 }
 
 export default App;
-

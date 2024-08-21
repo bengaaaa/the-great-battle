@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
 import './App.css';
 import Food from './Food';
 import { foods } from './foods'; // Make sure this import is in your App.js file
+import React, { useEffect, useState } from 'react';
+import { fetchData } from './api';
 
 function App() {
   // Initialize state with two random foods
@@ -16,9 +17,20 @@ function App() {
     setFood2(getRandomFood());
   };
 
+  const [data, setData] = useState(null);
+
+  useEffect(() => {
+    const getData = async () => {
+      const result = await fetchData();
+      setData(result);
+    };
+
+    getData();
+  }, []);
+
   return (
     <div className="App">
-      <h1>Asian food fight!</h1>
+      <h1>Food Fight Asia</h1>
       <div className="food-vs-container">
         <div onClick={generateNewFoods}>
           <Food {...food1} />
@@ -28,6 +40,7 @@ function App() {
           <Food {...food2} />
         </div>
       </div>
+      <p>{data && JSON.stringify(data)}</p>
     </div>
   );
 }

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { fetchLeaderboard } from './api';
-import axios from 'axios';
+import './Leaderboard.css'; // Import the CSS file
 
 const Leaderboard = () => {
   const [foods, setFoods] = useState([]);
@@ -19,9 +19,9 @@ const Leaderboard = () => {
   }, []);
 
   return (
-    <div>
-      <h2>Leaderboard</h2>
-      <table>
+    <div className="leaderboard-container">
+      <h2 className="leaderboard-title">Leaderboard</h2>
+      <table className="leaderboard-table">
         <thead>
           <tr>
             <th>Rank</th>

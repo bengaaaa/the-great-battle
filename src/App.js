@@ -1,9 +1,10 @@
 import './App.css';
 import Food from './Food';
 import React, { useEffect, useState } from 'react';
-import { BrowserRouter as Router, Route, Link, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { fetchRandomFoods, updateEloRatings } from './api';
 import Leaderboard from './Leaderboard';
+import Header from './Header'; // Import the Header component
 
 function App() {
   const [food1, setFood1] = useState(null);
@@ -83,15 +84,7 @@ function App() {
   return (
     <Router basename="/the-great-battle">
       <div className="App">
-        <header>
-          <h1>Food Fight Asia</h1>
-          <Link
-            to="/leaderboard"
-            style={{ position: 'absolute', top: 10, right: 10 }}
-          >
-            Leaderboard
-          </Link>
-        </header>
+        <Header />
         <Routes>
           <Route
             path="/"

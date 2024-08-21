@@ -73,6 +73,44 @@ app.get('/random-foods', (req, res) => {
   });
 });
 
+// Route to update ELO ratings
+app.post('/update-elo', (req, res) => {
+  const { winnerId, loserId, winnerNewElo, loserNewElo } = req.body;
+
+  const updateWinnerQuery = 'UPDATE food SET elo = ? WHERE id = ?';
+  const updateLoserQuery = 'UPDATE food SET elo = ? WHERE id = ?';
+
+  db.query(updateWinnerQuery, [winnerNewElo, winnerId], (err) => {
+    if (err) {
+      res.status(500).send('Failed to update winner ELO');
+      return;
+    }
+
+    db.query(updateLoserQuery, [loserNewElo, loserId], (err) => {
+      if (err) {
+        res.status(500).send('Failed to update loser ELO');
+        return;
+      }
+
+      res.sendStatus(200);
+    });
+  });
+});
+
+// Route to get the leaderboard
+app.get('/leaderboard', (req, res) => {
+  const query = 'SELECT * FROM food ORDER BY elo DESC';
+
+  db.query(query, (err, results) => {
+    if (err) {
+      res.status(500).send('Database query failed');
+      return;
+    }
+
+    res.json(results);
+  });
+});
+
 // Start the server
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);

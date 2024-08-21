@@ -34,3 +34,34 @@ export const fetchRandomFoods = async () => {
     throw error;
   }
 };
+
+// Update ELO ratings in the backend
+export const updateEloRatings = async (
+  winnerId,
+  loserId,
+  winnerNewElo,
+  loserNewElo
+) => {
+  try {
+    await axios.post(`${API_URL}/update-elo`, {
+      winnerId,
+      loserId,
+      winnerNewElo,
+      loserNewElo,
+    });
+  } catch (error) {
+    console.error('Error updating ELO ratings:', error);
+    throw error;
+  }
+};
+
+// Fetch leaderboard data from the backend
+export const fetchLeaderboard = async () => {
+  try {
+    const response = await axios.get(`${API_URL}/leaderboard`);
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching leaderboard data:', error);
+    throw error;
+  }
+};

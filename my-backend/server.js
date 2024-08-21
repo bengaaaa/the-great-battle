@@ -25,14 +25,51 @@ db.connect((err) => {
   console.log('Connected to MySQL');
 });
 
-// Example route
-app.get('/', (req, res) => {
-  db.query('SELECT NOW() AS currentTime', (err, result) => {
+// Route to get all foods
+app.get('/food', (req, res) => {
+  const query = 'SELECT * FROM food';
+
+  db.query(query, (err, results) => {
     if (err) {
       res.status(500).send('Database query failed');
       return;
     }
+
+    res.json(results);
+  });
+});
+
+// Route to get food by id
+app.get('/food/:id', (req, res) => {
+  const foodId = req.params.id;
+  const query = 'SELECT * FROM food WHERE id = ?';
+
+  db.query(query, [foodId], (err, result) => {
+    if (err) {
+      res.status(500).send('Database query failed');
+      return;
+    }
+
+    if (result.length === 0) {
+      res.status(404).send('Food not found');
+      return;
+    }
+
     res.json(result[0]);
+  });
+});
+
+// Route to get two random foods
+app.get('/random-foods', (req, res) => {
+  const query = 'SELECT * FROM food ORDER BY RAND() LIMIT 2';
+
+  db.query(query, (err, results) => {
+    if (err) {
+      res.status(500).send('Database query failed');
+      return;
+    }
+
+    res.json(results);
   });
 });
 
